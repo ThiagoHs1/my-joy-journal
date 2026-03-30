@@ -14,7 +14,92 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      link_clicks: {
+        Row: {
+          created_at: string | null
+          id: string
+          link_index: number
+          link_url: string
+          page_id: string | null
+          referrer: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          link_index: number
+          link_url: string
+          page_id?: string | null
+          referrer?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          link_index?: number
+          link_url?: string
+          page_id?: string | null
+          referrer?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "link_clicks_page_id_fkey"
+            columns: ["page_id"]
+            isOneToOne: false
+            referencedRelation: "pages"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      pages: {
+        Row: {
+          avatar_url: string | null
+          bio: string | null
+          created_at: string | null
+          display_name: string
+          edit_token: string
+          id: string
+          links: Json | null
+          location: string | null
+          social_icons: Json | null
+          theme: string | null
+          theme_options: Json | null
+          updated_at: string | null
+          username: string
+          view_count: number | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          bio?: string | null
+          created_at?: string | null
+          display_name: string
+          edit_token: string
+          id?: string
+          links?: Json | null
+          location?: string | null
+          social_icons?: Json | null
+          theme?: string | null
+          theme_options?: Json | null
+          updated_at?: string | null
+          username: string
+          view_count?: number | null
+        }
+        Update: {
+          avatar_url?: string | null
+          bio?: string | null
+          created_at?: string | null
+          display_name?: string
+          edit_token?: string
+          id?: string
+          links?: Json | null
+          location?: string | null
+          social_icons?: Json | null
+          theme?: string | null
+          theme_options?: Json | null
+          updated_at?: string | null
+          username?: string
+          view_count?: number | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
