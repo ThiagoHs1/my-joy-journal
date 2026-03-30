@@ -1,11 +1,15 @@
+import { LucideProps } from 'lucide-react';
 import {
   Github, Linkedin, Twitter, Instagram, Youtube, Twitch,
   Music2, Globe, Mail, MessageCircle, Send, BookOpen,
   Code2, Dribbble, Figma, BookMarked, Link2, Disc3,
   MessageSquare
 } from 'lucide-react';
+import React from 'react';
 
-const iconMap: Record<string, React.ComponentType<{ className?: string; size?: number }>> = {
+type IconComponent = React.ForwardRefExoticComponent<Omit<LucideProps, 'ref'> & React.RefAttributes<SVGSVGElement>>;
+
+const iconMap: Record<string, IconComponent> = {
   github: Github,
   linkedin: Linkedin,
   twitter: Twitter,
