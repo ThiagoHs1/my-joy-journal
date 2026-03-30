@@ -276,7 +276,7 @@ export default function Editor() {
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle className="font-['Space_Grotesk'] flex items-center gap-2">
-              <AlertTriangle size={20} className="text-amber-500" />
+              <AlertTriangle size={20} className="text-destructive" />
               Save your edit link!
             </AlertDialogTitle>
             <AlertDialogDescription className="space-y-3">
