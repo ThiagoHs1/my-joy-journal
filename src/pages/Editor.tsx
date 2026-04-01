@@ -137,6 +137,7 @@ export default function Editor() {
       theme: data.theme,
       theme_options: data.theme_options as unknown as Json,
       edit_token: editToken,
+      is_public: data.is_public !== false,
     };
 
     let error;
