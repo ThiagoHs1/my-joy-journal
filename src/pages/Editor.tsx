@@ -9,6 +9,7 @@ import { ProfileSection } from '@/components/editor/ProfileSection';
 import { LinksSection } from '@/components/editor/LinksSection';
 import { SocialIconsSection } from '@/components/editor/SocialIconsSection';
 import { AppearanceSection } from '@/components/editor/AppearanceSection';
+import { AnalyticsSection } from '@/components/editor/AnalyticsSection';
 import { PhonePreview } from '@/components/PhonePreview';
 import { toast } from 'sonner';
 import { Json } from '@/integrations/supabase/types';
@@ -271,6 +272,17 @@ export default function Editor() {
                   <AppearanceSection data={data} onChange={update} />
                 </AccordionContent>
               </AccordionItem>
+
+              {!isNew && (
+                <AccordionItem value="analytics" className="border rounded-xl bg-card px-6">
+                  <AccordionTrigger className="font-['Space_Grotesk'] font-semibold text-lg">
+                    📊 Analytics
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <AnalyticsSection data={data} />
+                  </AccordionContent>
+                </AccordionItem>
+              )}
             </Accordion>
           </div>
 
