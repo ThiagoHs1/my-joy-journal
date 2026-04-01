@@ -339,8 +339,6 @@ export default function Editor() {
                 </AccordionItem>
               )}
             </Accordion>
-              )}
-            </Accordion>
           </div>
 
           {/* Preview */}
