@@ -28,6 +28,7 @@ export interface PageData {
   social_icons: SocialIcons;
   theme: string;
   theme_options: Record<string, string>;
+  is_public?: boolean;
   edit_token?: string;
   view_count?: number;
 }

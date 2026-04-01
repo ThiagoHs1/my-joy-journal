@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { Save, Eye, Share2, FileText, AlertTriangle, Copy, Check } from 'lucide-react';
+import { Save, Eye, Share2, FileText, AlertTriangle, Copy, Check, Globe } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { PageData, DEFAULT_PAGE_DATA, generateToken, LinkItem, SocialIcons } from '@/lib/types';
 import { ProfileSection } from '@/components/editor/ProfileSection';
@@ -10,7 +10,10 @@ import { LinksSection } from '@/components/editor/LinksSection';
 import { SocialIconsSection } from '@/components/editor/SocialIconsSection';
 import { AppearanceSection } from '@/components/editor/AppearanceSection';
 import { AnalyticsSection } from '@/components/editor/AnalyticsSection';
+import { TemplateSelector } from '@/components/editor/TemplateSelector';
 import { PhonePreview } from '@/components/PhonePreview';
+import { Switch } from '@/components/ui/switch';
+import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
 import { Json } from '@/integrations/supabase/types';
 import {
@@ -134,6 +137,7 @@ export default function Editor() {
       theme: data.theme,
       theme_options: data.theme_options as unknown as Json,
       edit_token: editToken,
+      is_public: data.is_public !== false,
     };
 
     let error;
@@ -236,6 +240,28 @@ export default function Editor() {
         <div className="grid lg:grid-cols-[1fr_400px] gap-8">
           {/* Editor */}
           <div className="space-y-4">
+            {/* Template + Public toggle */}
+            <div className="flex items-center justify-between gap-4">
+              {isNew && (
+                <TemplateSelector onSelect={(t) => update({
+                  display_name: t.name,
+                  bio: t.bio,
+                  links: t.links,
+                  social_icons: t.social_icons,
+                  theme: t.theme,
+                  theme_options: t.theme_options,
+                })} />
+              )}
+              <div className="flex items-center gap-2 ml-auto">
+                <Globe size={14} className="text-muted-foreground" />
+                <Label className="text-sm">Public</Label>
+                <Switch
+                  checked={data.is_public !== false}
+                  onCheckedChange={(v) => update({ is_public: v })}
+                />
+              </div>
+            </div>
+
             <Accordion type="multiple" defaultValue={['profile', 'links', 'social', 'appearance']} className="space-y-3">
               <AccordionItem value="profile" className="border rounded-xl bg-card px-6">
                 <AccordionTrigger className="font-['Space_Grotesk'] font-semibold text-lg">
