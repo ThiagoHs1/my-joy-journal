@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Check, X, ArrowRight, Sparkles, Link2, Zap } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { PlatformIcon } from '@/components/PlatformIcon';
+import { AppThemeSwitcher } from '@/components/AppThemeSwitcher';
 
 const EXAMPLE_PAGES = [
   {
@@ -80,9 +81,12 @@ export default function Index() {
           </div>
           <span className="font-['Space_Grotesk'] font-bold text-xl">LinkForge</span>
         </div>
-        <Button variant="ghost" size="sm" onClick={() => navigate('/explore')}>
-          Explore
-        </Button>
+        <div className="flex items-center gap-2">
+          <AppThemeSwitcher />
+          <Button variant="ghost" size="sm" onClick={() => navigate('/explore')}>
+            Explore
+          </Button>
+        </div>
       </nav>
 
       {/* Hero */}

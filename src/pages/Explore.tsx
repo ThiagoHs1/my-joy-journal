@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Eye, Link2, Search, ArrowLeft } from 'lucide-react';
 import { THEME_ORDER, themes } from '@/lib/themes';
+import { AppThemeSwitcher } from '@/components/AppThemeSwitcher';
 
 interface PageCard {
   id: string;
@@ -116,9 +117,12 @@ export default function Explore() {
             <span className="text-muted-foreground">/</span>
             <span className="text-sm font-medium">Explore</span>
           </div>
-          <Button variant="outline" size="sm" onClick={() => navigate('/')}>
-            <ArrowLeft size={14} className="mr-1" /> Home
-          </Button>
+          <div className="flex items-center gap-2">
+            <AppThemeSwitcher />
+            <Button variant="outline" size="sm" onClick={() => navigate('/')}>
+              <ArrowLeft size={14} className="mr-1" /> Home
+            </Button>
+          </div>
         </div>
       </header>
 
