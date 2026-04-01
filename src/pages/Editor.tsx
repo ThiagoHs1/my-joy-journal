@@ -235,7 +235,7 @@ export default function Editor() {
         <div className="grid lg:grid-cols-[1fr_400px] gap-8">
           {/* Editor */}
           <div className="space-y-4">
-            <Accordion type="multiple" defaultValue={['profile', 'links', 'social']} className="space-y-3">
+            <Accordion type="multiple" defaultValue={['profile', 'links', 'social', 'appearance']} className="space-y-3">
               <AccordionItem value="profile" className="border rounded-xl bg-card px-6">
                 <AccordionTrigger className="font-['Space_Grotesk'] font-semibold text-lg">
                   Profile
@@ -260,6 +260,15 @@ export default function Editor() {
                 </AccordionTrigger>
                 <AccordionContent>
                   <SocialIconsSection socialIcons={data.social_icons} onChange={(social_icons) => update({ social_icons })} />
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="appearance" className="border rounded-xl bg-card px-6">
+                <AccordionTrigger className="font-['Space_Grotesk'] font-semibold text-lg">
+                  Appearance
+                </AccordionTrigger>
+                <AccordionContent>
+                  <AppearanceSection data={data} onChange={update} />
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
