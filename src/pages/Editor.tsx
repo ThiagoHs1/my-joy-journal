@@ -144,7 +144,7 @@ export default function Editor() {
       links: data.links as unknown as Json,
       social_icons: data.social_icons as unknown as Json,
       theme: data.theme,
-      theme_options: data.theme_options as unknown as Json,
+      theme_options: { ...data.theme_options, header_banner: data.header_banner } as unknown as Json,
       edit_token: editToken,
       is_public: data.is_public !== false,
     };
