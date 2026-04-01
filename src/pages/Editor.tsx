@@ -8,6 +8,7 @@ import { PageData, DEFAULT_PAGE_DATA, generateToken, LinkItem, SocialIcons } fro
 import { ProfileSection } from '@/components/editor/ProfileSection';
 import { LinksSection } from '@/components/editor/LinksSection';
 import { SocialIconsSection } from '@/components/editor/SocialIconsSection';
+import { AppearanceSection } from '@/components/editor/AppearanceSection';
 import { PhonePreview } from '@/components/PhonePreview';
 import { toast } from 'sonner';
 import { Json } from '@/integrations/supabase/types';
