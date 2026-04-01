@@ -15,11 +15,15 @@ export type AppThemeId = keyof typeof APP_THEMES;
 interface AppThemeContextType {
   appTheme: AppThemeId;
   setAppTheme: (theme: AppThemeId) => void;
+  darkMode: boolean;
+  toggleDarkMode: () => void;
 }
 
 const AppThemeContext = createContext<AppThemeContextType>({
   appTheme: 'purple',
   setAppTheme: () => {},
+  darkMode: false,
+  toggleDarkMode: () => {},
 });
 
 export function AppThemeProvider({ children }: { children: ReactNode }) {
@@ -27,9 +31,23 @@ export function AppThemeProvider({ children }: { children: ReactNode }) {
     return (localStorage.getItem('linkforge_app_theme') as AppThemeId) || 'purple';
   });
 
+  const [darkMode, setDarkMode] = useState(() => {
+    const stored = localStorage.getItem('linkforge_dark_mode');
+    if (stored !== null) return stored === 'true';
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  });
+
   const setAppTheme = (theme: AppThemeId) => {
     setAppThemeState(theme);
     localStorage.setItem('linkforge_app_theme', theme);
+  };
+
+  const toggleDarkMode = () => {
+    setDarkMode(prev => {
+      const next = !prev;
+      localStorage.setItem('linkforge_dark_mode', String(next));
+      return next;
+    });
   };
 
   useEffect(() => {
@@ -38,13 +56,16 @@ export function AppThemeProvider({ children }: { children: ReactNode }) {
     root.style.setProperty('--primary', t.primary);
     root.style.setProperty('--ring', t.ring);
     root.style.setProperty('--accent', t.accent);
-    // Dark mode variants
     root.style.setProperty('--sidebar-primary', t.primary);
     root.style.setProperty('--sidebar-ring', t.ring);
   }, [appTheme]);
 
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', darkMode);
+  }, [darkMode]);
+
   return (
-    <AppThemeContext.Provider value={{ appTheme, setAppTheme }}>
+    <AppThemeContext.Provider value={{ appTheme, setAppTheme, darkMode, toggleDarkMode }}>
       {children}
     </AppThemeContext.Provider>
   );
