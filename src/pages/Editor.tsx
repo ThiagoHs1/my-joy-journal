@@ -9,6 +9,7 @@ import { ProfileSection } from '@/components/editor/ProfileSection';
 import { LinksSection } from '@/components/editor/LinksSection';
 import { SocialIconsSection } from '@/components/editor/SocialIconsSection';
 import { AppearanceSection } from '@/components/editor/AppearanceSection';
+import { AnalyticsSection } from '@/components/editor/AnalyticsSection';
 import { PhonePreview } from '@/components/PhonePreview';
 import { toast } from 'sonner';
 import { Json } from '@/integrations/supabase/types';
