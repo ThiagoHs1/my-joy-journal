@@ -4,6 +4,15 @@ export interface LinkItem {
   icon: string;
   enabled: boolean;
   order: number;
+  type?: 'link' | 'separator';
+  // Separator options
+  separatorStyle?: 'line' | 'text' | 'space';
+  separatorText?: string;
+  // Embed options
+  embed?: boolean;
+  // Schedule options
+  showFrom?: string;
+  showUntil?: string;
 }
 
 export interface SocialIcons {
@@ -15,6 +24,17 @@ export interface SocialIcons {
   tiktok?: string;
   email?: string;
   whatsapp?: string;
+}
+
+export interface HeaderBanner {
+  enabled: boolean;
+  type: 'color' | 'gradient' | 'image';
+  color?: string;
+  gradientColor1?: string;
+  gradientColor2?: string;
+  gradientAngle?: number;
+  imageUrl?: string;
+  height?: number;
 }
 
 export interface PageData {
@@ -31,6 +51,7 @@ export interface PageData {
   is_public?: boolean;
   edit_token?: string;
   view_count?: number;
+  header_banner?: HeaderBanner;
 }
 
 export const PLATFORM_ICONS = [
@@ -76,6 +97,29 @@ export function detectPlatform(url: string): string {
   if (lower.includes('figma.com')) return 'figma';
   if (lower.includes('notion.so') || lower.includes('notion.site')) return 'notion';
   return 'link';
+}
+
+export function getYouTubeId(url: string): string | null {
+  const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+  return match ? match[1] : null;
+}
+
+export function getSpotifyEmbedUrl(url: string): { embedUrl: string; type: 'track' | 'playlist' } | null {
+  const match = url.match(/open\.spotify\.com\/(track|playlist)\/([a-zA-Z0-9]+)/);
+  if (!match) return null;
+  return {
+    embedUrl: `https://open.spotify.com/embed/${match[1]}/${match[2]}`,
+    type: match[1] as 'track' | 'playlist',
+  };
+}
+
+export function isLinkVisible(link: LinkItem): boolean {
+  if (!link.enabled) return false;
+  if (link.type === 'separator') return true;
+  const now = Date.now();
+  if (link.showFrom && new Date(link.showFrom).getTime() > now) return false;
+  if (link.showUntil && new Date(link.showUntil).getTime() < now) return false;
+  return true;
 }
 
 export function generateToken(): string {

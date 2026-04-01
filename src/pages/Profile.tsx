@@ -17,6 +17,12 @@ function parseLinks(json: Json | null): LinkItem[] {
     icon: l.icon || 'link',
     enabled: l.enabled !== false,
     order: l.order ?? i,
+    type: l.type || 'link',
+    separatorStyle: l.separatorStyle,
+    separatorText: l.separatorText,
+    embed: l.embed,
+    showFrom: l.showFrom,
+    showUntil: l.showUntil,
   }));
 }
 
@@ -105,6 +111,7 @@ export default function Profile() {
       social_icons: parseSocialIcons(page.social_icons),
       theme: page.theme || 'default',
       theme_options: (page.theme_options as Record<string, string>) || {},
+      header_banner: page.theme_options && (page.theme_options as any).header_banner ? (page.theme_options as any).header_banner : undefined,
     };
 
     // Update meta tags dynamically

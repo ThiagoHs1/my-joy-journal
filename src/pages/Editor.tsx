@@ -4,13 +4,15 @@ import { Button } from '@/components/ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Save, Eye, Share2, FileText, AlertTriangle, Copy, Check, Globe } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
-import { PageData, DEFAULT_PAGE_DATA, generateToken, LinkItem, SocialIcons } from '@/lib/types';
+import { PageData, DEFAULT_PAGE_DATA, generateToken, LinkItem, SocialIcons, HeaderBanner } from '@/lib/types';
 import { ProfileSection } from '@/components/editor/ProfileSection';
 import { LinksSection } from '@/components/editor/LinksSection';
 import { SocialIconsSection } from '@/components/editor/SocialIconsSection';
 import { AppearanceSection } from '@/components/editor/AppearanceSection';
 import { AnalyticsSection } from '@/components/editor/AnalyticsSection';
 import { TemplateSelector } from '@/components/editor/TemplateSelector';
+import { HeaderSection } from '@/components/editor/HeaderSection';
+import { ShareSection } from '@/components/editor/ShareSection';
 import { PhonePreview } from '@/components/PhonePreview';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
@@ -34,6 +36,12 @@ function parseLinks(json: Json | null): LinkItem[] {
     icon: l.icon || 'link',
     enabled: l.enabled !== false,
     order: l.order ?? i,
+    type: l.type || 'link',
+    separatorStyle: l.separatorStyle,
+    separatorText: l.separatorText,
+    embed: l.embed,
+    showFrom: l.showFrom,
+    showUntil: l.showUntil,
   }));
 }
 
@@ -97,6 +105,7 @@ export default function Editor() {
         social_icons: parseSocialIcons(page.social_icons),
         theme: page.theme || 'default',
         theme_options: (page.theme_options as Record<string, string>) || {},
+        header_banner: page.theme_options && (page.theme_options as any).header_banner ? (page.theme_options as any).header_banner : undefined,
         edit_token: page.edit_token,
         view_count: page.view_count || 0,
       });
@@ -135,7 +144,7 @@ export default function Editor() {
       links: data.links as unknown as Json,
       social_icons: data.social_icons as unknown as Json,
       theme: data.theme,
-      theme_options: data.theme_options as unknown as Json,
+      theme_options: { ...data.theme_options, header_banner: data.header_banner } as unknown as Json,
       edit_token: editToken,
       is_public: data.is_public !== false,
     };
@@ -262,7 +271,16 @@ export default function Editor() {
               </div>
             </div>
 
-            <Accordion type="multiple" defaultValue={['profile', 'links', 'social', 'appearance']} className="space-y-3">
+            <Accordion type="multiple" defaultValue={['header', 'profile', 'links', 'social', 'appearance']} className="space-y-3">
+              <AccordionItem value="header" className="border rounded-xl bg-card px-6">
+                <AccordionTrigger className="font-['Space_Grotesk'] font-semibold text-lg">
+                  🖼️ Header Banner
+                </AccordionTrigger>
+                <AccordionContent>
+                  <HeaderSection banner={data.header_banner} onChange={(header_banner) => update({ header_banner })} />
+                </AccordionContent>
+              </AccordionItem>
+
               <AccordionItem value="profile" className="border rounded-xl bg-card px-6">
                 <AccordionTrigger className="font-['Space_Grotesk'] font-semibold text-lg">
                   Profile
@@ -298,6 +316,17 @@ export default function Editor() {
                   <AppearanceSection data={data} onChange={update} />
                 </AccordionContent>
               </AccordionItem>
+
+              {!isNew && (
+                <AccordionItem value="share" className="border rounded-xl bg-card px-6">
+                  <AccordionTrigger className="font-['Space_Grotesk'] font-semibold text-lg">
+                    🔗 Share & QR Code
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <ShareSection username={data.username} theme={data.theme} />
+                  </AccordionContent>
+                </AccordionItem>
+              )}
 
               {!isNew && (
                 <AccordionItem value="analytics" className="border rounded-xl bg-card px-6">
