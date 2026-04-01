@@ -81,9 +81,12 @@ export default function Index() {
           </div>
           <span className="font-['Space_Grotesk'] font-bold text-xl">LinkForge</span>
         </div>
-        <Button variant="ghost" size="sm" onClick={() => navigate('/explore')}>
-          Explore
-        </Button>
+        <div className="flex items-center gap-2">
+          <AppThemeSwitcher />
+          <Button variant="ghost" size="sm" onClick={() => navigate('/explore')}>
+            Explore
+          </Button>
+        </div>
       </nav>
 
       {/* Hero */}
