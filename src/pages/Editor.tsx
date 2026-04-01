@@ -271,7 +271,16 @@ export default function Editor() {
               </div>
             </div>
 
-            <Accordion type="multiple" defaultValue={['profile', 'links', 'social', 'appearance']} className="space-y-3">
+            <Accordion type="multiple" defaultValue={['header', 'profile', 'links', 'social', 'appearance']} className="space-y-3">
+              <AccordionItem value="header" className="border rounded-xl bg-card px-6">
+                <AccordionTrigger className="font-['Space_Grotesk'] font-semibold text-lg">
+                  🖼️ Header Banner
+                </AccordionTrigger>
+                <AccordionContent>
+                  <HeaderSection banner={data.header_banner} onChange={(header_banner) => update({ header_banner })} />
+                </AccordionContent>
+              </AccordionItem>
+
               <AccordionItem value="profile" className="border rounded-xl bg-card px-6">
                 <AccordionTrigger className="font-['Space_Grotesk'] font-semibold text-lg">
                   Profile
@@ -309,6 +318,17 @@ export default function Editor() {
               </AccordionItem>
 
               {!isNew && (
+                <AccordionItem value="share" className="border rounded-xl bg-card px-6">
+                  <AccordionTrigger className="font-['Space_Grotesk'] font-semibold text-lg">
+                    🔗 Share & QR Code
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <ShareSection username={data.username} theme={data.theme} />
+                  </AccordionContent>
+                </AccordionItem>
+              )}
+
+              {!isNew && (
                 <AccordionItem value="analytics" className="border rounded-xl bg-card px-6">
                   <AccordionTrigger className="font-['Space_Grotesk'] font-semibold text-lg">
                     📊 Analytics
@@ -317,6 +337,8 @@ export default function Editor() {
                     <AnalyticsSection data={data} />
                   </AccordionContent>
                 </AccordionItem>
+              )}
+            </Accordion>
               )}
             </Accordion>
           </div>
