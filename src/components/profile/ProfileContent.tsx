@@ -177,7 +177,7 @@ export function ProfileContent({ data, onLinkClick }: Props) {
                   });
                 }}
               >
-                <PlatformIcon platform={link.icon} size={20} className="shrink-0" style={{ color: 'inherit' }} />
+                <PlatformIcon platform={link.icon} size={20} className="shrink-0" />
                 <span className="flex-1 text-sm font-medium truncate text-center">{link.title}</span>
                 <div className="w-5" />
               </motion.button>
