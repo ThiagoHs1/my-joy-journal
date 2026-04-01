@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { Save, Eye, Share2, FileText, AlertTriangle, Copy, Check } from 'lucide-react';
+import { Save, Eye, Share2, FileText, AlertTriangle, Copy, Check, Globe } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { PageData, DEFAULT_PAGE_DATA, generateToken, LinkItem, SocialIcons } from '@/lib/types';
 import { ProfileSection } from '@/components/editor/ProfileSection';
