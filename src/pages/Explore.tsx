@@ -117,7 +117,8 @@ export default function Explore() {
             <span className="text-muted-foreground">/</span>
             <span className="text-sm font-medium">Explore</span>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1">
+            <DarkModeToggle />
             <AppThemeSwitcher />
             <Button variant="outline" size="sm" onClick={() => navigate('/')}>
               <ArrowLeft size={14} className="mr-1" /> Home
