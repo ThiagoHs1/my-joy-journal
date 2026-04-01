@@ -10,7 +10,10 @@ import { LinksSection } from '@/components/editor/LinksSection';
 import { SocialIconsSection } from '@/components/editor/SocialIconsSection';
 import { AppearanceSection } from '@/components/editor/AppearanceSection';
 import { AnalyticsSection } from '@/components/editor/AnalyticsSection';
+import { TemplateSelector } from '@/components/editor/TemplateSelector';
 import { PhonePreview } from '@/components/PhonePreview';
+import { Switch } from '@/components/ui/switch';
+import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
 import { Json } from '@/integrations/supabase/types';
 import {
