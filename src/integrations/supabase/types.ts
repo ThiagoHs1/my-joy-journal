@@ -57,6 +57,7 @@ export type Database = {
           display_name: string
           edit_token: string
           id: string
+          is_public: boolean
           links: Json | null
           location: string | null
           social_icons: Json | null
@@ -73,6 +74,7 @@ export type Database = {
           display_name: string
           edit_token: string
           id?: string
+          is_public?: boolean
           links?: Json | null
           location?: string | null
           social_icons?: Json | null
@@ -89,6 +91,7 @@ export type Database = {
           display_name?: string
           edit_token?: string
           id?: string
+          is_public?: boolean
           links?: Json | null
           location?: string | null
           social_icons?: Json | null
