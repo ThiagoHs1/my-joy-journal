@@ -1,7 +1,8 @@
-import { Settings } from 'lucide-react';
+import { Settings, Moon, Sun } from 'lucide-react';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Button } from '@/components/ui/button';
 import { APP_THEMES, AppThemeId, useAppTheme } from '@/contexts/AppThemeContext';
+import { Separator } from '@/components/ui/separator';
 
 const THEME_COLORS: Record<AppThemeId, string> = {
   purple: '#8B5CF6',
@@ -14,7 +15,7 @@ const THEME_COLORS: Record<AppThemeId, string> = {
 };
 
 export function AppThemeSwitcher() {
-  const { appTheme, setAppTheme } = useAppTheme();
+  const { appTheme, setAppTheme, darkMode, toggleDarkMode } = useAppTheme();
 
   return (
     <Popover>
@@ -23,7 +24,7 @@ export function AppThemeSwitcher() {
           <Settings size={16} />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-48 p-3" align="end">
+      <PopoverContent className="w-52 p-3" align="end">
         <p className="text-xs font-semibold mb-2">App Theme</p>
         <div className="grid grid-cols-4 gap-2">
           {(Object.keys(APP_THEMES) as AppThemeId[]).map((id) => (
@@ -38,7 +39,24 @@ export function AppThemeSwitcher() {
             />
           ))}
         </div>
+        <Separator className="my-3" />
+        <button
+          onClick={toggleDarkMode}
+          className="flex items-center gap-2 w-full px-2 py-1.5 rounded-md text-sm hover:bg-muted transition-colors"
+        >
+          {darkMode ? <Sun size={14} /> : <Moon size={14} />}
+          {darkMode ? 'Light Mode' : 'Dark Mode'}
+        </button>
       </PopoverContent>
     </Popover>
+  );
+}
+
+export function DarkModeToggle() {
+  const { darkMode, toggleDarkMode } = useAppTheme();
+  return (
+    <Button variant="ghost" size="icon" className="w-8 h-8" onClick={toggleDarkMode}>
+      {darkMode ? <Sun size={16} /> : <Moon size={16} />}
+    </Button>
   );
 }
