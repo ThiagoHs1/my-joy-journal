@@ -111,6 +111,7 @@ export default function Profile() {
       social_icons: parseSocialIcons(page.social_icons),
       theme: page.theme || 'default',
       theme_options: (page.theme_options as Record<string, string>) || {},
+      header_banner: page.theme_options && (page.theme_options as any).header_banner ? (page.theme_options as any).header_banner : undefined,
     };
 
     // Update meta tags dynamically
