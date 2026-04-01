@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Eye, Link2, Search, ArrowLeft } from 'lucide-react';
 import { THEME_ORDER, themes } from '@/lib/themes';
+import { AppThemeSwitcher } from '@/components/AppThemeSwitcher';
 
 interface PageCard {
   id: string;
