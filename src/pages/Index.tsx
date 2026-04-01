@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Check, X, ArrowRight, Sparkles, Link2, Zap } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { PlatformIcon } from '@/components/PlatformIcon';
+import { AppThemeSwitcher } from '@/components/AppThemeSwitcher';
 
 const EXAMPLE_PAGES = [
   {
