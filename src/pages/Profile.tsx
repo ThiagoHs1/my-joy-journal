@@ -17,6 +17,12 @@ function parseLinks(json: Json | null): LinkItem[] {
     icon: l.icon || 'link',
     enabled: l.enabled !== false,
     order: l.order ?? i,
+    type: l.type || 'link',
+    separatorStyle: l.separatorStyle,
+    separatorText: l.separatorText,
+    embed: l.embed,
+    showFrom: l.showFrom,
+    showUntil: l.showUntil,
   }));
 }
 
