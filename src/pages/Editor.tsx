@@ -240,6 +240,28 @@ export default function Editor() {
         <div className="grid lg:grid-cols-[1fr_400px] gap-8">
           {/* Editor */}
           <div className="space-y-4">
+            {/* Template + Public toggle */}
+            <div className="flex items-center justify-between gap-4">
+              {isNew && (
+                <TemplateSelector onSelect={(t) => update({
+                  display_name: t.name,
+                  bio: t.bio,
+                  links: t.links,
+                  social_icons: t.social_icons,
+                  theme: t.theme,
+                  theme_options: t.theme_options,
+                })} />
+              )}
+              <div className="flex items-center gap-2 ml-auto">
+                <Globe size={14} className="text-muted-foreground" />
+                <Label className="text-sm">Public</Label>
+                <Switch
+                  checked={data.is_public !== false}
+                  onCheckedChange={(v) => update({ is_public: v })}
+                />
+              </div>
+            </div>
+
             <Accordion type="multiple" defaultValue={['profile', 'links', 'social', 'appearance']} className="space-y-3">
               <AccordionItem value="profile" className="border rounded-xl bg-card px-6">
                 <AccordionTrigger className="font-['Space_Grotesk'] font-semibold text-lg">
