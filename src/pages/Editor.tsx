@@ -272,6 +272,17 @@ export default function Editor() {
                   <AppearanceSection data={data} onChange={update} />
                 </AccordionContent>
               </AccordionItem>
+
+              {!isNew && (
+                <AccordionItem value="analytics" className="border rounded-xl bg-card px-6">
+                  <AccordionTrigger className="font-['Space_Grotesk'] font-semibold text-lg">
+                    📊 Analytics
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <AnalyticsSection data={data} />
+                  </AccordionContent>
+                </AccordionItem>
+              )}
             </Accordion>
           </div>
 
